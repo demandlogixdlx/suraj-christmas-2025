@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎄 Suraj, You've Been Summoned 🎄</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&family=Mountains+of+Christmas:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rage-red: #D72638;
+            --grinch-green: #4CB944;
+            --dark-green: #2D5A27;
+            --paper-cream: #FFF8DC;
+            --envelope-red: #C41E3A;
+            --gold: #FFD700;
+            --neon-pink: #ff006e;
+            --neon-blue: #00f5ff;
+            --neon-purple: #8b00ff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: #000;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ========== SCENE MANAGEMENT ========== */
+        .scene {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+        }
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========== SCENE 1: DRAMATIC INTRO ========== */
+        #scene-intro {
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #000 100%);
+        }
+        
+        .intro-text {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            text-align: center;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            animation: flicker 0.1s infinite;
+            padding: 0 20px;
+            line-height: 2;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .intro-name {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold), 0 0 60px var(--neon-pink);
+            margin: 30px 0;
+            animation: nameGlow 1s ease-in-out infinite alternate, namePulse 2s ease-in-out infinite;
+        }
+        @keyframes nameGlow {
+            0% { text-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold); }
+            100% { text-shadow: 0 0 40px var(--gold), 0 0 80px var(--gold), 0 0 120px var(--neon-pink); }
+        }
+        @keyframes namePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .tap-to-begin {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            color: white;
+            margin-top: 50px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .cyber-lines {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0,245,255,0.03) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(0,245,255,0.03) 50%, transparent 51%);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* ========== SCENE 2: ENVELOPE ========== */
+        #scene-envelope {
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #050508 100%);
+        }
+        
+        .envelope-wrapper {
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .envelope {
+            width: 300px;
+            height: 190px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: envelopeFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.8));
+        }
+        @keyframes envelopeFloat {
+            0%, 100% { transform: translateY(0) rotateY(-5deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+        .envelope.shaking {
+            animation: envelopeShake 0.08s infinite;
+        }
+        @keyframes envelopeShake {
+            0%, 100% { transform: rotate(-2deg) scale(1.02); }
+            50% { transform: rotate(2deg) scale(1.02); }
+        }
+        
+        .envelope-body {
+            width: 100%; height: 100%;
+            background: linear-gradient(145deg, var(--envelope-red) 0%, #8B0000 100%);
+            border-radius: 10px;
+            border: 4px solid #5a0000;
+            position: relative;
+            overflow: hidden;
+        }
+        .envelope-body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 55%;
+            background: linear-gradient(180deg, #ff4444 0%, var(--envelope-red) 100%);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top center;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10;
+            border: 4px solid #5a0000;
+        }
+        .envelope.open .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+        
+        .envelope-inner {
+            position: absolute;
+            top: 10%; left: 8%;
+            width: 84%; height: 50%;
+            background: var(--paper-cream);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 0.75rem;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .wax-seal {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65px; height: 65px;
+            background: radial-gradient(circle at 30% 30%, #cc0000, #660000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5), inset 0 -3px 10px rgba(0,0,0,0.3);
+            border: 3px solid #440000;
+            animation: sealPulse 2s ease-in-out infinite;
+            z-index: 20;
+        }
+        @keyframes sealPulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.5), 0 0 0 0 rgba(255,215,0,0.6); }
+            50% { box-shadow: 0 8px 25px rgba(0,0,0,0.5), 0 0 0 25px rgba(255,215,0,0); }
+        }
+        
+        .envelope-tap-count {
+            margin-top: 60px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .envelope-progress {
+            width: 200px;
+            height: 12px;
+            background: #333;
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+        }
+        .envelope-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--grinch-green), var(--gold), var(--rage-red));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .envelope-hint {
+            margin-top: 25px;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            animation: hintPulse 2s ease-in-out infinite;
+        }
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* ========== SCENE 3: CARD REVEAL ========== */
+        #scene-card {
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, var(--paper-cream) 0%, #FFF5CC 100%);
+            border-radius: 20px;
+            padding: 30px 22px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            border: 5px solid var(--dark-green);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .card-corner {
+            position: absolute;
+            font-size: 2rem;
+            animation: cornerBounce 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        .card-corner.tl { top: 8px; left: 8px; }
+        .card-corner.tr { top: 8px; right: 8px; animation-delay: 0.3s; }
+        .card-corner.bl { bottom: 8px; left: 8px; animation-delay: 0.6s; }
+        .card-corner.br { bottom: 8px; right: 8px; animation-delay: 0.9s; }
+        @keyframes cornerBounce {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(20deg); }
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .characters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .character {
+            font-size: 3.5rem;
+            position: relative;
+            animation: characterBounce 1.5s ease-in-out infinite;
+            filter: drop-shadow(3px 3px 0 #000);
+        }
+        .character:nth-child(2) { animation-delay: 0.3s; }
+        @keyframes characterBounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .character .hammer {
+            position: absolute;
+            font-size: 1.8rem;
+            top: -8px; right: -15px;
+            animation: hammerSmash 0.4s ease-in-out infinite;
+        }
+        @keyframes hammerSmash {
+            0%, 100% { transform: rotate(-30deg); }
+            50% { transform: rotate(30deg); }
+        }
+        
+        .card-title {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2.5rem;
+            color: var(--rage-red);
+            text-shadow: 3px 3px 0 var(--dark-green);
+            margin-bottom: 8px;
+        }
+        
+        .lights-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .light {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            animation: lightGlow 0.8s ease-in-out infinite;
+        }
+        .light:nth-child(1) { background: #ff0000; animation-delay: 0s; }
+        .light:nth-child(2) { background: #00ff00; animation-delay: 0.1s; }
+        .light:nth-child(3) { background: #ffff00; animation-delay: 0.2s; }
+        .light:nth-child(4) { background: #0099ff; animation-delay: 0.3s; }
+        .light:nth-child(5) { background: #ff00ff; animation-delay: 0.4s; }
+        .light:nth-child(6) { background: #ff6600; animation-delay: 0.5s; }
+        .light:nth-child(7) { background: #00ffff; animation-delay: 0.6s; }
+        @keyframes lightGlow {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px currentColor; }
+            50% { opacity: 0.3; transform: scale(0.8); box-shadow: none; }
+        }
+        
+        .message-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px dashed #999;
+            position: relative;
+        }
+        .message-box::before {
+            content: '📎';
+            position: absolute;
+            top: -18px; left: 15px;
+            font-size: 2rem;
+            transform: rotate(-15deg);
+        }
+        
+        .greeting {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        .message p { margin-bottom: 15px; }
+        .highlight {
+            background: linear-gradient(180deg, transparent 50%, rgba(255,215,0,0.4) 50%);
+            padding: 0 3px;
+            font-weight: 700;
+        }
+        .rage-text {
+            color: var(--rage-red);
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            animation: rageShake 0.2s infinite;
+            display: inline-block;
+        }
+        @keyframes rageShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px) rotate(-1deg); }
+            75% { transform: translateX(2px) rotate(1deg); }
+        }
+        .strikethrough {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--grinch-green), var(--dark-green));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .continue-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: btnShine 3s infinite;
+        }
+        @keyframes btnShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* ========== SCENE 4: SMASH GAME ========== */
+        #scene-game {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 100%);
+        }
+        
+        .game-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-shadow: 3px 3px 0 #000, 0 0 20px var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .game-subtitle {
+            font-family: 'Comic Neue', cursive;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        
+        .score-display {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .score-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+        }
+        .score-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+        .score-value {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .game-arena {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 20px;
+            padding: 25px 15px;
+            border: 4px solid var(--grinch-green);
+            box-shadow: 0 0 30px rgba(76,185,68,0.3), inset 0 0 50px rgba(0,0,0,0.5);
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-grid {
+            position: absolute;
+            top: 0; left: 0;
+            width: 200%; height: 200%;
+            background: 
+                linear-gradient(90deg, rgba(76,185,68,0.05) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(76,185,68,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: gridScroll 20s linear infinite;
+        }
+        @keyframes gridScroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-30px, -30px); }
+        }
+        
+        .smash-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .smash-item {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: transform 0.1s;
+            position: relative;
+        }
+        .smash-item:active {
+            transform: scale(0.9);
+        }
+        .smash-item.smashed {
+            animation: itemSmash 0.5s ease-out forwards;
+        }
+        @keyframes itemSmash {
+            0% { transform: scale(1); opacity: 1; }
+            30% { transform: scale(1.3) rotate(-15deg); }
+            100% { transform: scale(0) rotate(180deg); opacity: 0; }
+        }
+        .smash-item .emoji {
+            font-size: 2.8rem;
+            transition: transform 0.1s;
+        }
+        .smash-item:active .emoji {
+            transform: scale(1.2);
+        }
+        .smash-item .label {
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.5rem;
+            animation: particleFly 0.8s ease-out forwards;
+            z-index: 100;
+        }
+        @keyframes particleFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+        
+        .rage-meter {
+            margin-top: 20px;
+        }
+        .rage-meter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .rage-meter-bar {
+            height: 25px;
+            background: #222;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+        .rage-meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--grinch-green), var(--gold), var(--rage-red));
+            width: 0%;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+        .rage-meter-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: meterShine 2s infinite;
+        }
+        @keyframes meterShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .game-message {
+            margin-top: 15px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            color: var(--gold);
+            min-height: 30px;
+        }
+        
+        .unlock-gift-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--rage-red), #8B0000);
+            color: white;
+            border: 4px solid var(--gold);
+            border-radius: 15px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+            animation: unlockPulse 1s infinite;
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+        .unlock-gift-btn.show {
+            display: block;
+        }
+        @keyframes unlockPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255,215,0,0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255,215,0,0.8); }
+        }
+
+        /* ========== SCENE 5: GIFT REVEAL ========== */
+        #scene-gift {
+            background: radial-gradient(ellipse at center, #1a0a1a 0%, #000 100%);
+        }
+        
+        .gift-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .gift-box-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        .gift-box {
+            font-size: 8rem;
+            animation: giftBounce 0.8s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(255,215,0,0.4));
+            cursor: pointer;
+        }
+        @keyframes giftBounce {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-25px) rotate(3deg); }
+        }
+        
+        .gift-sparkles {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 200px; height: 200px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: sparkleFloat 3s ease-in-out infinite;
+        }
+        @keyframes sparkleFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            50% { transform: translate(var(--mx), var(--my)) scale(1.3); opacity: 1; }
+        }
+        
+        .gift-text {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 15px;
+        }
+        
+        .ragery-logo {
+            font-family: 'Bangers', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            text-shadow: 4px 4px 0 var(--rage-red), 8px 8px 0 #000, 0 0 50px var(--gold);
+            animation: logoGlow 1s ease-in-out infinite alternate;
+            margin-bottom: 15px;
+        }
+        @keyframes logoGlow {
+            0% { text-shadow: 4px 4px 0 var(--rage-red), 8px 8px 0 #000, 0 0 30px var(--gold); transform: scale(1); }
+            100% { text-shadow: 4px 4px 0 var(--rage-red), 8px 8px 0 #000, 0 0 80px var(--gold); transform: scale(1.02); }
+        }
+        
+        .gift-description {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1rem;
+            color: #ccc;
+            max-width: 300px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
+        }
+        
+        .book-now-btn {
+            padding: 20px 50px;
+            background: linear-gradient(135deg, var(--grinch-green), var(--dark-green));
+            color: white;
+            border: 4px solid var(--gold);
+            border-radius: 20px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 30px rgba(76,185,68,0.3);
+            animation: bookBtnPulse 2s infinite;
+        }
+        @keyframes bookBtnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ========== SCENE 6: BOOKING ========== */
+        #scene-booking {
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .booking-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 22px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .booking-emoji {
+            font-size: 3rem;
+            animation: bookingEmojiBounce 1s ease-in-out infinite;
+        }
+        @keyframes bookingEmojiBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .booking-title {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--rage-red);
+            margin-top: 10px;
+        }
+        .booking-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .booking-warning {
+            background: rgba(215,38,56,0.1);
+            border: 2px solid var(--rage-red);
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: var(--rage-red);
+            font-weight: 700;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+        }
+        .form-label {
+            font-family: 'Comic Neue', cursive;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark-green);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .date-btn {
+            padding: 12px 5px;
+            background: #f5f5f5;
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .date-btn:active, .date-btn.selected {
+            background: linear-gradient(135deg, var(--grinch-green), var(--dark-green));
+            border-color: var(--dark-green);
+            color: white;
+            transform: scale(0.95);
+        }
+        .date-btn.selected {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(76,185,68,0.4);
+        }
+        .date-day {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .date-num {
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            margin: 3px 0;
+        }
+        .date-month {
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+        .time-btn {
+            padding: 12px 8px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .time-btn:active, .time-btn.selected {
+            background: linear-gradient(135deg, var(--rage-red), #8B0000);
+            border-color: #8B0000;
+            color: white;
+        }
+        .time-btn.selected {
+            box-shadow: 0 5px 15px rgba(215,38,56,0.4);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--grinch-green);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--rage-red), #8B0000);
+            color: white;
+            border: 4px solid #5a0000;
+            border-radius: 15px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.6rem;
+            cursor: pointer;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .submit-btn::before, .submit-btn::after {
+            content: '💥';
+            position: absolute;
+            font-size: 1.3rem;
+            animation: btnEmoji 0.6s ease-in-out infinite;
+        }
+        .submit-btn::before { left: 15px; }
+        .submit-btn::after { right: 15px; animation-delay: 0.3s; }
+        @keyframes btnEmoji {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(20deg); }
+        }
+
+        /* ========== SCENE 7: SUCCESS ========== */
+        #scene-success {
+            background: radial-gradient(ellipse at center, #0a2010 0%, #000 100%);
+        }
+        
+        .success-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .success-emoji {
+            font-size: 6rem;
+            animation: successBounce 0.8s ease-in-out infinite;
+        }
+        @keyframes successBounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .success-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--grinch-green);
+            text-shadow: 3px 3px 0 #000;
+            margin: 20px 0;
+        }
+        
+        .success-text {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .success-footer {
+            margin-top: 40px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        /* ========== GLOBAL EFFECTS ========== */
+        .snow-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        .snowflake {
+            position: absolute;
+            color: white;
+            opacity: 0.8;
+            animation: snowfall linear infinite;
+        }
+        @keyframes snowfall {
+            0% { transform: translateY(-20px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        .confetti-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px; height: 10px;
+            animation: confettiFall 4s ease-out forwards;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Vibration feedback simulation */
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        
+        /* Hide time section initially */
+        #timeSection {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        #timeSection.show {
+            display: block;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snow Effect -->
+    <div class="snow-container" id="snow"></div>
+    
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- ========== SCENE 1: DRAMATIC INTRO ========== -->
+    <div class="scene active" id="scene-intro">
+        <div class="cyber-lines"></div>
+        <div class="intro-text">INCOMING TRANSMISSION...</div>
+        <div class="intro-name">SURAJ</div>
+        <div class="intro-text">YOU HAVE BEEN CHOSEN</div>
+        <div class="tap-to-begin">[ TAP ANYWHERE TO BEGIN ]</div>
+    </div>
+
+    <!-- ========== SCENE 2: ENVELOPE ========== -->
+    <div class="scene" id="scene-envelope">
+        <div class="envelope-wrapper">
+            <div class="envelope" id="envelope">
+                <div class="envelope-body">
+                    <span class="envelope-holly left">🎄</span>
+                    <span class="envelope-holly right">🎄</span>
+                </div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-inner">🔴 TOP SECRET 🔴<br>For Suraj's Eyes Only</div>
+                <div class="wax-seal">🎅</div>
+            </div>
+            <div class="envelope-tap-count">TAP TO OPEN: <span id="tapCount">0</span>/10</div>
+            <div class="envelope-progress"><div class="envelope-progress-fill" id="progressFill"></div></div>
+        </div>
+        <div class="envelope-hint">👆 Tap the envelope repeatedly!</div>
+    </div>
+
+    <!-- ========== SCENE 3: CARD ========== -->
+    <div class="scene" id="scene-card">
+        <div class="card">
+            <span class="card-corner tl">🎄</span>
+            <span class="card-corner tr">⭐</span>
+            <span class="card-corner bl">🎁</span>
+            <span class="card-corner br">❄️</span>
+            
+            <div class="card-header">
+                <div class="characters">
+                    <div class="character">😈</div>
+                    <div class="character">🎅<span class="hammer">🔨</span></div>
+                </div>
+                <h1 class="card-title">🎄 Merry Christmas! 🎄</h1>
+                <div class="lights-row">
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                </div>
+            </div>
+            
+            <div class="message-box">
+                <h2 class="greeting">Dear Suraj, 👋</h2>
+                <div class="message">
+                    <p>We've survived another year of <span class="strikethrough">soul-crushing</span> <span class="highlight">character-building</span> corporate life. The endless meetings that could've been emails. The emails that shouldn't have existed at all. The "quick syncs" that lasted three hours. <span class="rage-text">THE AUDACITY OF IT ALL.</span></p>
+                    <p>But you know what? Through all the spreadsheets, the "per my last email" passive aggression, and the mysterious disappearance of lunch breaks... <span class="highlight">you've been there.</span> A real one. A fellow survivor of the cubicle apocalypse.</p>
+                    <p>Your growth mindset and positivity were a <span class="highlight">literal life saver</span> for me this year. I honestly don't know how I would have survived the corporate chaos without you.</p>
+                    <p>So this Christmas, I'm not getting you another gift card or some corporate swag nobody wants. Nope. This year, we're doing something <span class="rage-text">THERAPEUTIC.</span></p>
+                </div>
+            </div>
+            
+            <button class="continue-btn" onclick="goToScene('scene-game')">🔨 LET'S WARM UP! 🔨</button>
+        </div>
+    </div>
+
+    <!-- ========== SCENE 4: SMASH GAME ========== -->
+    <div class="scene" id="scene-game">
+        <div class="game-container">
+            <h2 class="game-title">💥 CORPORATE RAGE THERAPY 💥</h2>
+            <p class="game-subtitle">Destroy all the corporate nightmares to unlock your gift!</p>
+            
+            <div class="score-display">
+                <div class="score-item">
+                    <div class="score-label">Destroyed</div>
+                    <div class="score-value" id="destroyed">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Combo</div>
+                    <div class="score-value" id="combo">x1</div>
+                </div>
+            </div>
+            
+            <div class="game-arena" id="gameArena">
+                <div class="game-grid"></div>
+                <div class="smash-items" id="smashItems">
+                    <div class="smash-item" data-item="laptop"><span class="emoji">💻</span><span class="label">Slow Laptop</span></div>
+                    <div class="smash-item" data-item="printer"><span class="emoji">🖨️</span><span class="label">Jammed Printer</span></div>
+                    <div class="smash-item" data-item="reports"><span class="emoji">📊</span><span class="label">TPS Reports</span></div>
+                    <div class="smash-item" data-item="slack"><span class="emoji">📱</span><span class="label">Slack Pings</span></div>
+                    <div class="smash-item" data-item="meeting"><span class="emoji">📅</span><span class="label">Meeting Invites</span></div>
+                    <div class="smash-item" data-item="coffee"><span class="emoji">☕</span><span class="label">Cold Coffee</span></div>
+                    <div class="smash-item" data-item="email"><span class="emoji">📧</span><span class="label">Reply All</span></div>
+                    <div class="smash-item" data-item="chart"><span class="emoji">📈</span><span class="label">KPI Charts</span></div>
+                    <div class="smash-item" data-item="zoom"><span class="emoji">🎥</span><span class="label">Zoom Call</span></div>
+                </div>
+            </div>
+            
+            <div class="rage-meter">
+                <div class="rage-meter-label">
+                    <span>😌 Calm</span>
+                    <span>🔥 MAX RAGE</span>
+                </div>
+                <div class="rage-meter-bar">
+                    <div class="rage-meter-fill" id="rageFill"></div>
+                </div>
+            </div>
+            
+            <div class="game-message" id="gameMessage"></div>
+            
+            <button class="unlock-gift-btn" id="unlockBtn" onclick="goToScene('scene-gift')">🎁 UNLOCK YOUR GIFT! 🎁</button>
+        </div>
+    </div>
+
+    <!-- ========== SCENE 5: GIFT REVEAL ========== -->
+    <div class="scene" id="scene-gift">
+        <div class="gift-container">
+            <div class="gift-box-wrapper">
+                <div class="gift-sparkles" id="giftSparkles"></div>
+                <div class="gift-box" id="giftBox">🎁</div>
+            </div>
+            
+            <div class="gift-text">YOUR GIFT: A Day of REAL Destruction at...</div>
+            <div class="ragery-logo">THE RAGERY! 💥</div>
+            <p class="gift-description">A Rage Room session with corporate workstations set up specifically for us to destroy! 🖥️🔨</p>
+            
+            <button class="book-now-btn" onclick="goToScene('scene-booking')">📅 BOOK YOUR SMASH SESSION!</button>
+        </div>
+    </div>
+
+    <!-- ========== SCENE 6: BOOKING ========== -->
+    <div class="scene" id="scene-booking">
+        <div class="booking-card">
+            <div class="booking-header">
+                <div class="booking-emoji">📅</div>
+                <h2 class="booking-title">SCHEDULE YOUR SMASH SESSION</h2>
+                <p class="booking-subtitle">Pick a day to unleash corporate chaos together!</p>
+                <div class="booking-warning">⚠️ I need at least 2 days notice to book!</div>
+            </div>
+            
+            <form id="bookingForm" action="https://formsubmit.co/ppanchal1031@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="🎄💥 CHRISTMAS SMASH ALERT: Suraj picked a Ragery date!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" id="selectedDate" name="selected_date" required>
+                <input type="hidden" id="selectedTime" name="preferred_time" required>
+                
+                <div class="form-section">
+                    <label class="form-label">🗓️ Pick Your Destruction Date:</label>
+                    <div class="date-grid" id="dateGrid"></div>
+                </div>
+                
+                <div class="form-section" id="timeSection">
+                    <label class="form-label">⏰ Pick Your Smash Time:</label>
+                    <div class="time-grid" id="timeGrid"></div>
+                </div>
+                
+                <div class="form-section">
+                    <label class="form-label">🎯 What Do You MOST Want to Destroy?</label>
+                    <input type="text" class="form-input" name="rage_target" placeholder="A printer, monitors, keyboards...">
+                </div>
+                
+                <div class="form-section">
+                    <label class="form-label">💬 Pre-Rage Thoughts?</label>
+                    <input type="text" class="form-input" name="additional_notes" placeholder="Any corporate frustrations to share?">
+                </div>
+                
+                <button type="submit" class="submit-btn">LET'S SMASH!</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== SCENE 7: SUCCESS ========== -->
+    <div class="scene" id="scene-success">
+        <div class="success-container">
+            <div class="success-emoji">🎉💥🔨</div>
+            <h2 class="success-title">RAGE SCHEDULED!</h2>
+            <p class="success-text">Your destruction date request has been sent to Priya!<br><br>Get ready to smash some corporate nightmares into oblivion.<br><br><strong>See you at The Ragery! 💪</strong></p>
+            <div class="success-footer">Here's to leaving everything that tried to destroy us in 2025! 🔥<br><br>— Priya</div>
+        </div>
+    </div>
+
+    <script>
+        // ========== SCENE MANAGEMENT ==========
+        function goToScene(sceneId) {
+            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+            document.getElementById(sceneId).classList.add('active');
+            
+            if (sceneId === 'scene-gift') {
+                createConfetti(100);
+                initGiftSparkles();
+            }
+            if (sceneId === 'scene-success') {
+                createConfetti(150);
+            }
+        }
+
+        // ========== SCENE 1: INTRO ==========
+        document.getElementById('scene-intro').addEventListener('click', () => {
+            goToScene('scene-envelope');
+        });
+
+        // ========== SCENE 2: ENVELOPE ==========
+        let tapCount = 0;
+        const envelope = document.getElementById('envelope');
+        const envelopeWrapper = document.querySelector('.envelope-wrapper');
+        
+        envelopeWrapper.addEventListener('click', () => {
+            if (tapCount >= 10) return;
+            
+            tapCount++;
+            document.getElementById('tapCount').textContent = tapCount;
+            document.getElementById('progressFill').style.width = (tapCount * 10) + '%';
+            
+            // Shake effect
+            envelope.classList.add('shaking');
+            setTimeout(() => envelope.classList.remove('shaking'), 100);
+            
+            // Vibrate if supported
+            if (navigator.vibrate) navigator.vibrate(30);
+            
+            // Create tap particles
+            createTapParticle(event);
+            
+            if (tapCount >= 10) {
+                envelope.classList.add('open');
+                setTimeout(() => {
+                    createConfetti(80);
+                    setTimeout(() => goToScene('scene-card'), 1000);
+                }, 500);
+            }
+        });
+        
+        function createTapParticle(e) {
+            const particles = ['💥', '⚡', '✨', '🔥', '💫'];
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                font-size: 2rem;
+                pointer-events: none;
+                z-index: 10000;
+                animation: particleFly 0.6s ease-out forwards;
+                --tx: ${(Math.random() - 0.5) * 100}px;
+                --ty: ${(Math.random() - 0.5) * 100}px;
+            `;
+            particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 600);
+        }
+
+        // ========== SCENE 4: SMASH GAME ==========
+        let destroyed = 0;
+        let combo = 1;
+        let lastSmashTime = 0;
+        const totalItems = 9;
+        const messages = ['', '💢 Nice!', '🔥 Keep going!', '💪 Harder!', '😤 YESSS!', '🤯 UNSTOPPABLE!', '💀 MERCILESS!', '👹 CHAOTIC!', '🌋 LEGENDARY!', '🎉 MAXIMUM RAGE!'];
+        
+        document.querySelectorAll('.smash-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (this.classList.contains('smashed')) return;
+                
+                this.classList.add('smashed');
+                destroyed++;
+                
+                // Combo system
+                const now = Date.now();
+                if (now - lastSmashTime < 500) {
+                    combo = Math.min(combo + 1, 5);
+                } else {
+                    combo = 1;
+                }
+                lastSmashTime = now;
+                
+                document.getElementById('destroyed').textContent = destroyed;
+                document.getElementById('combo').textContent = 'x' + combo;
+                document.getElementById('rageFill').style.width = (destroyed / totalItems * 100) + '%';
+                document.getElementById('gameMessage').textContent = messages[destroyed] || '🔥🔥🔥';
+                
+                // Vibrate
+                if (navigator.vibrate) navigator.vibrate(50 * combo);
+                
+                // Particles
+                const rect = this.getBoundingClientRect();
+                const arena = document.getElementById('gameArena');
+                const particles = ['💥', '⚡', '✨', '🔥', '💫', '💢', '😤', '🤬'];
+                for (let i = 0; i < 8 + combo * 2; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    p.textContent = particles[Math.floor(Math.random() * particles.length)];
+                    p.style.left = (rect.left - arena.getBoundingClientRect().left + rect.width/2) + 'px';
+                    p.style.top = (rect.top - arena.getBoundingClientRect().top + rect.height/2) + 'px';
+                    p.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                    p.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+                    arena.appendChild(p);
+                    setTimeout(() => p.remove(), 800);
+                }
+                
+                // Check win
+                if (destroyed >= totalItems) {
+                    document.getElementById('unlockBtn').classList.add('show');
+                    document.getElementById('gameMessage').textContent = '🎁 GIFT UNLOCKED! 🎁';
+                    createConfetti(50);
+                }
+            });
+        });
+
+        // ========== SCENE 5: GIFT ==========
+        function initGiftSparkles() {
+            const container = document.getElementById('giftSparkles');
+            container.innerHTML = '';
+            const sparkles = ['✨', '⭐', '💫', '🌟', '💥'];
+            for (let i = 0; i < 12; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.setProperty('--mx', (Math.random() - 0.5) * 40 + 'px');
+                s.style.setProperty('--my', (Math.random() - 0.5) * 40 + 'px');
+                s.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(s);
+            }
+        }
+        
+        document.getElementById('giftBox').addEventListener('click', function() {
+            this.style.animation = 'none';
+            this.offsetHeight;
+            this.style.animation = 'giftBounce 0.15s ease-in-out 6';
+            if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+            createConfetti(30);
+        });
+
+        // ========== SCENE 6: BOOKING ==========
+        const availability = {
+            'Thu, Dec 25': ['4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM'],
+            'Fri, Dec 26': ['4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM'],
+            'Sat, Dec 27': ['12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM'],
+            'Sun, Dec 28': ['1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM'],
+            'Mon, Dec 29': ['4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM'],
+            'Tue, Dec 30': ['4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM'],
+            'Wed, Dec 31': ['4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM']
+        };
+        
+        const dates = [
+            { day: 'Thu', num: '25', month: 'Dec', full: 'Thu, Dec 25' },
+            { day: 'Fri', num: '26', month: 'Dec', full: 'Fri, Dec 26' },
+            { day: 'Sat', num: '27', month: 'Dec', full: 'Sat, Dec 27' },
+            { day: 'Sun', num: '28', month: 'Dec', full: 'Sun, Dec 28' },
+            { day: 'Mon', num: '29', month: 'Dec', full: 'Mon, Dec 29' },
+            { day: 'Tue', num: '30', month: 'Dec', full: 'Tue, Dec 30' },
+            { day: 'Wed', num: '31', month: 'Dec', full: 'Wed, Dec 31' }
+        ];
+        
+        const dateGrid = document.getElementById('dateGrid');
+        dates.forEach(d => {
+            const btn = document.createElement('div');
+            btn.className = 'date-btn';
+            btn.innerHTML = `<div class="date-day">${d.day}</div><div class="date-num">${d.num}</div><div class="date-month">${d.month}</div>`;
+            btn.addEventListener('click', () => selectDate(btn, d.full));
+            dateGrid.appendChild(btn);
+        });
+        
+        function selectDate(btn, dateStr) {
+            document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('selectedDate').value = dateStr;
+            
+            // Show times
+            const timeGrid = document.getElementById('timeGrid');
+            timeGrid.innerHTML = '';
+            availability[dateStr].forEach(time => {
+                const tBtn = document.createElement('div');
+                tBtn.className = 'time-btn';
+                tBtn.textContent = time;
+                tBtn.addEventListener('click', () => selectTime(tBtn, time));
+                timeGrid.appendChild(tBtn);
+            });
+            document.getElementById('timeSection').classList.add('show');
+            
+            if (navigator.vibrate) navigator.vibrate(30);
+        }
+        
+        function selectTime(btn, timeStr) {
+            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('selectedTime').value = timeStr;
+            if (navigator.vibrate) navigator.vibrate(30);
+        }
+        
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            setTimeout(() => goToScene('scene-success'), 100);
+        });
+
+        // ========== GLOBAL EFFECTS ==========
+        function createSnow() {
+            const container = document.getElementById('snow');
+            const flakes = ['❄', '❅', '❆', '✦', '•'];
+            for (let i = 0; i < 60; i++) {
+                const f = document.createElement('div');
+                f.className = 'snowflake';
+                f.textContent = flakes[Math.floor(Math.random() * flakes.length)];
+                f.style.left = Math.random() * 100 + '%';
+                f.style.fontSize = (Math.random() * 1 + 0.5) + 'rem';
+                f.style.opacity = Math.random() * 0.6 + 0.4;
+                f.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                f.style.animationDelay = Math.random() * 8 + 's';
+                container.appendChild(f);
+            }
+        }
+        
+        function createConfetti(count) {
+            const container = document.getElementById('confetti');
+            const colors = ['#D72638', '#4CB944', '#FFD700', '#ff006e', '#00f5ff', '#8b00ff'];
+            for (let i = 0; i < count; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti-piece';
+                c.style.left = Math.random() * 100 + '%';
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                c.style.animationDelay = Math.random() * 0.5 + 's';
+                c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                container.appendChild(c);
+                setTimeout(() => c.remove(), 4000);
+            }
+        }
+        
+        // Initialize
+        createSnow();
+    </script>
+</body>
+</html>
